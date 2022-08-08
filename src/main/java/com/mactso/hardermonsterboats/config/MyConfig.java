@@ -31,21 +31,21 @@ public class MyConfig {
 	public static final ForgeConfigSpec COMMON_SPEC;
 
 
-	public static String[] willMountBoat;
-	public static String[] willNotHitBoat;
+	public static String[] willMonsterMountBoat;
+	public static String[] willMonsterNotHitBoat;
 
-	public static boolean isWillMountBoat(String classname)
+	public static boolean isWillMonsterMountBoat(String classname)
 	{	
-		for (String mod : willNotHitBoat) {
+		for (String mod : willMonsterNotHitBoat) {
 			if (classname.contains(mod)) {
 				return true;
 			}
 		}
 		return false;
 	}
-	public static boolean isWillNotHitBoat(String classname)
+	public static boolean isWillMonsterNotHitBoat(String classname)
 	{	
-		for (String mod : willNotHitBoat) {
+		for (String mod : willMonsterNotHitBoat) {
 			if (classname.contains(mod)) {
 				return true;
 			}
@@ -62,8 +62,8 @@ public class MyConfig {
 	}
 
 	public static void bakeConfig() {
-		willMountBoat  = extract(COMMON.willMountBoat.get());
-		willNotHitBoat = extract(COMMON.willNotHitBoat.get());
+		willMonsterMountBoat  = extract(COMMON.willMonsterMountBoat.get());
+		willMonsterNotHitBoat = extract(COMMON.willMonsterNotHitBoat.get());
 	}
 
 	private static String[] extract(List<? extends String> value)
@@ -73,23 +73,23 @@ public class MyConfig {
 
 	
 	public static class Common {
-		List<String> willMountBoatList = Arrays.asList("minecraft","ironchest");
-		List<String> willNotHitBoatList = Arrays.asList("minecraft","ironchest");
-		public final ConfigValue<List<? extends String>> willMountBoat;
-		public final ConfigValue<List<? extends String>> willNotHitBoat;
+		List<String> willMonsterMountBoatList = Arrays.asList("minecraft:zombie_villager","minecraft:vex");
+		List<String> willMonsterNotHitBoatList = Arrays.asList("minecraft:zombie_villager","minecraft:vex");
+		public final ConfigValue<List<? extends String>> willMonsterMountBoat;
+		public final ConfigValue<List<? extends String>> willMonsterNotHitBoat;
 
 		public Common(ForgeConfigSpec.Builder builder) {
 			String baseTrans = Main.MODID + ".config.";
 
-			willMountBoat = builder
+			willMonsterMountBoat = builder
 					.comment("Checked Mods Name List")
-					.translation(Main.MODID + ".config." + "willMountBoat")
-					.defineList("willMountBoat", willMountBoatList, Common::isString);
+					.translation(Main.MODID + ".config." + "willMonsterMountBoat")
+					.defineList("willMonsterMountBoat", willMonsterMountBoatList, Common::isString);
 
-			willNotHitBoat = builder
+			willMonsterNotHitBoat = builder
 					.comment("Checked Mods Name List")
-					.translation(Main.MODID + ".config." + "willNotHitBoat")
-					.defineList("willNotHitBoat", willNotHitBoatList, Common::isString);
+					.translation(Main.MODID + ".config." + "willMonsterNotHitBoat")
+					.defineList("willMonsterNotHitBoat", willMonsterNotHitBoatList, Common::isString);
 
 		}
 		public static boolean isString(Object o)

@@ -43,11 +43,11 @@ public class EntityMountEventHandler {
 
 				String meRN = me.getType().getRegistryName().toString();
 
-				if (!MyConfig.isWillNotHitBoat(meRN)) {
+				if (!MyConfig.isWillMonsterNotHitBoat(meRN)) {
 					boat.hurt(DamageSource.GENERIC, 6.0f);
 				}
 
-				if (!MyConfig.isWillMountBoat(meRN)) {
+				if (!MyConfig.isWillMonsterMountBoat(meRN)) {
 					if (event.isCancelable()) {
 						event.setCanceled(true);
 						return;
