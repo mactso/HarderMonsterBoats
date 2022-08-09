@@ -38,7 +38,7 @@ public class MyConfig {
 	
 	public static boolean isWillMonsterMountBoat(String classname)
 	{	
-		for (String mod : willMonsterNotHitBoat) {
+		for (String mod : willMonsterMountBoat) {
 			if (classname.contains(mod)) {
 				return true;
 			}
@@ -58,17 +58,6 @@ public class MyConfig {
 		return false;
 	}
 	
-
-	
-	@SubscribeEvent
-	public static void onModConfigEvent(final ModConfigEvent configEvent) {
-		if (configEvent.getConfig().getSpec() == MyConfig.COMMON_SPEC) {
-			bakeConfig();
-		}
-	}
-
-	
-	
 	public static boolean isWillMonsterNotLeaveBoat(String classname)
 	{	
 		for (String mod : willMonsterNotLeaveBoat) {
@@ -77,6 +66,13 @@ public class MyConfig {
 			}
 		}
 		return false;
+	}
+	
+	@SubscribeEvent
+	public static void onModConfigEvent(final ModConfigEvent configEvent) {
+		if (configEvent.getConfig().getSpec() == MyConfig.COMMON_SPEC) {
+			bakeConfig();
+		}
 	}
 
 	

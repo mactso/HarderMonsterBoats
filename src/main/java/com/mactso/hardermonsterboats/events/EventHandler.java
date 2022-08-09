@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import com.mactso.hardermonsterboats.Main;
 import com.mactso.hardermonsterboats.config.MyConfig;
 
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Monster;
@@ -26,12 +27,14 @@ public class EventHandler {
     {
     	
         LivingEntity e = event.getEntityLiving();
-        if (e.getVehicle() instanceof Boat) {
-			String meRN = e.getType().getRegistryName().toString();
-			if (!MyConfig.isWillMonsterNotLeaveBoat(meRN)) {
-	        	e.stopRiding();
-			}
+        if (!(e instanceof ServerPlayer)) {
+            if (e.getVehicle() instanceof Boat) {
+    			String meRN = e.getType().getRegistryName().toString();
+    			if (!MyConfig.isWillMonsterNotLeaveBoat(meRN)) {
+    	        	e.stopRiding();
+    			}
 
+            }
         }
         
     }
@@ -40,7 +43,7 @@ public class EventHandler {
 	
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public void onMountEvent(EntityMountEvent event) {
-
+int x = 4;
 		if (event.getEntityBeingMounted() instanceof Boat boat) {
 			if (event.getEntity() instanceof Monster me) {
 
@@ -50,7 +53,9 @@ public class EventHandler {
 					boat.hurt(DamageSource.GENERIC, 6.0f);
 				}
 
-				if (!MyConfig.isWillMonsterMountBoat(meRN)) {
+				if (MyConfig.isWillMonsterMountBoat(meRN)) {
+					return;
+				} else {
 					if (event.isCancelable()) {
 						event.setCanceled(true);
 						return;
