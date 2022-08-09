@@ -33,7 +33,9 @@ public class MyConfig {
 
 	public static String[] willMonsterMountBoat;
 	public static String[] willMonsterNotHitBoat;
+	public static String[] willMonsterNotLeaveBoat;
 
+	
 	public static boolean isWillMonsterMountBoat(String classname)
 	{	
 		for (String mod : willMonsterNotHitBoat) {
@@ -43,6 +45,9 @@ public class MyConfig {
 		}
 		return false;
 	}
+
+	
+	
 	public static boolean isWillMonsterNotHitBoat(String classname)
 	{	
 		for (String mod : willMonsterNotHitBoat) {
@@ -53,6 +58,7 @@ public class MyConfig {
 		return false;
 	}
 	
+
 	
 	@SubscribeEvent
 	public static void onModConfigEvent(final ModConfigEvent configEvent) {
@@ -61,9 +67,24 @@ public class MyConfig {
 		}
 	}
 
+	
+	
+	public static boolean isWillMonsterNotLeaveBoat(String classname)
+	{	
+		for (String mod : willMonsterNotLeaveBoat) {
+			if (classname.contains(mod)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	
+	
 	public static void bakeConfig() {
 		willMonsterMountBoat  = extract(COMMON.willMonsterMountBoat.get());
 		willMonsterNotHitBoat = extract(COMMON.willMonsterNotHitBoat.get());
+		willMonsterNotLeaveBoat = extract(COMMON.willMonsterNotLeaveBoat.get());
 	}
 
 	private static String[] extract(List<? extends String> value)
@@ -74,10 +95,15 @@ public class MyConfig {
 	
 	public static class Common {
 		List<String> willMonsterMountBoatList = Arrays.asList("minecraft:zombie_villager","minecraft:vex");
-		List<String> willMonsterNotHitBoatList = Arrays.asList("minecraft:zombie_villager","minecraft:vex");
+		List<String> willMonsterNotHitBoatList = Arrays.asList("minecraft:zombie_villager","minecraft:zombie","minecraft:creeper","minecraft:skeleton","nasty:skeleton", "minecraft:vex");
+		List<String> willMonsterNotLeaveBoatList = Arrays.asList("minecraft:zombie_villager");
+
 		public final ConfigValue<List<? extends String>> willMonsterMountBoat;
 		public final ConfigValue<List<? extends String>> willMonsterNotHitBoat;
+		public final ConfigValue<List<? extends String>> willMonsterNotLeaveBoat;
 
+		
+		
 		public Common(ForgeConfigSpec.Builder builder) {
 			String baseTrans = Main.MODID + ".config.";
 
@@ -86,12 +112,18 @@ public class MyConfig {
 					.translation(Main.MODID + ".config." + "willMonsterMountBoat")
 					.defineList("willMonsterMountBoat", willMonsterMountBoatList, Common::isString);
 
+			willMonsterNotLeaveBoat = builder
+					.comment("Checked Mods Name List")
+					.translation(Main.MODID + ".config." + "willMonsterNotLeaveBoat")
+					.defineList("willMonsterNotLeaveBoat", willMonsterNotLeaveBoatList, Common::isString);
+			
 			willMonsterNotHitBoat = builder
 					.comment("Checked Mods Name List")
 					.translation(Main.MODID + ".config." + "willMonsterNotHitBoat")
 					.defineList("willMonsterNotHitBoat", willMonsterNotHitBoatList, Common::isString);
 
 		}
+		
 		public static boolean isString(Object o)
 		{
 			return (o instanceof String);

@@ -5,7 +5,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.IExtensionPoint.DisplayTest;
 
 import com.mactso.hardermonsterboats.config.MyConfig;
-import com.mactso.hardermonsterboats.events.EntityMountEventHandler;
+import com.mactso.hardermonsterboats.events.EventHandler;
 
 
 import net.minecraftforge.fml.ModLoadingContext;
@@ -31,7 +31,7 @@ public class Main {
 	    
 		@SubscribeEvent 
 		public void preInit (final FMLCommonSetupEvent event) {
-			MinecraftForge.EVENT_BUS.register(new EntityMountEventHandler());
+			MinecraftForge.EVENT_BUS.register(new EventHandler());
 		}  
 
 }
