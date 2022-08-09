@@ -43,7 +43,7 @@ public class EventHandler {
 	
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public void onMountEvent(EntityMountEvent event) {
-int x = 4;
+
 		if (event.getEntityBeingMounted() instanceof Boat boat) {
 			if (event.getEntity() instanceof Monster me) {
 
