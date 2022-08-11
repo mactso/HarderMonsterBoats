@@ -8,6 +8,7 @@ import com.mactso.hardermonsterboats.config.MyConfig;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.vehicle.Boat;
@@ -26,10 +27,10 @@ public class EventHandler {
     public static void onTarget(LivingDamageEvent event)
     {
     	
-        LivingEntity e = event.getEntityLiving();
+        LivingEntity e = event.getEntity();
         if (!(e instanceof ServerPlayer)) {
             if (e.getVehicle() instanceof Boat) {
-    			String meRN = e.getType().getRegistryName().toString();
+				String meRN = EntityType.getKey(e.getType()).toString();
     			if (!MyConfig.isWillMonsterNotLeaveBoat(meRN)) {
     	        	e.stopRiding();
     			}
@@ -47,7 +48,7 @@ public class EventHandler {
 		if (event.getEntityBeingMounted() instanceof Boat boat) {
 			if (event.getEntity() instanceof Monster me) {
 
-				String meRN = me.getType().getRegistryName().toString();
+				String meRN = EntityType.getKey(me.getType()).toString();
 
 				if (!MyConfig.isWillMonsterNotHitBoat(meRN)) {
 					boat.hurt(DamageSource.GENERIC, 6.0f);
