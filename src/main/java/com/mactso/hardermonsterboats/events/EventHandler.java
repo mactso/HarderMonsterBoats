@@ -6,11 +6,13 @@ import org.apache.logging.log4j.Logger;
 import com.mactso.hardermonsterboats.Main;
 import com.mactso.hardermonsterboats.config.MyConfig;
 
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.boss.dragon.EnderDragonEntity;
+import net.minecraft.entity.item.BoatEntity;
+import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -27,8 +29,8 @@ public class EventHandler {
     {
     	
         LivingEntity e = event.getEntityLiving();
-        if (!(e instanceof ServerPlayer)) {
-            if (e.getVehicle() instanceof Boat) {
+        if (!(e instanceof ServerPlayerEntity)) {
+            if (e.getRidingEntity() instanceof BoatEntity) {
     			String meRN = e.getType().getRegistryName().toString();
     			if (!MyConfig.isWillMonsterNotLeaveBoat(meRN)) {
     	        	e.stopRiding();
@@ -43,14 +45,15 @@ public class EventHandler {
 	
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public void onMountEvent(EntityMountEvent event) {
-
-		if (event.getEntityBeingMounted() instanceof Boat boat) {
-			if (event.getEntity() instanceof Monster me) {
-
+		
+		if (event.getEntityBeingMounted() instanceof BoatEntity) {
+			BoatEntity boat = (BoatEntity) event.getEntityBeingMounted();
+			if (event.getEntity() instanceof MonsterEntity) {
+				MobEntity me = (MobEntity) event.getEntity();
 				String meRN = me.getType().getRegistryName().toString();
 
 				if (!MyConfig.isWillMonsterNotHitBoat(meRN)) {
-					boat.hurt(DamageSource.GENERIC, 6.0f);
+					boat.attackEntityFrom(DamageSource.GENERIC, 6.0f);
 				}
 
 				if (MyConfig.isWillMonsterMountBoat(meRN)) {

@@ -6,11 +6,11 @@ import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.entity.player.ServerPlayerEntity;
 
 public class MyLogger {
 
-	public static void logItem(ServerPlayer cheater, String violation, boolean header) {
+	public static void logItem(ServerPlayerEntity cheater, String violation, boolean header) {
 
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
 	    LocalDateTime now = LocalDateTime.now();  
@@ -27,10 +27,10 @@ public class MyLogger {
 			p = System.out;
 		}
 
-		String pos = cheater.blockPosition().toString();
+		String pos = cheater.getPosition().toString();
 		String name = cheater.getName().getString();
 
-		if (header) p.println(dtf.format(now) + " ("+String.format("%-20s", pos) + ")  " +String.format("%-16s", name) + ") " + cheater.getStringUUID());
+		if (header) p.println(dtf.format(now) + " ("+String.format("%-20s", pos) + ")  " +String.format("%-16s", name) + ") " + cheater.getUniqueID());
 		p.println("   " + violation);
 		
 		if (p != System.out) {

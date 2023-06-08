@@ -1,27 +1,24 @@
 modLoader="javafml"
-loaderVersion="[39,)"
+loaderVersion="[34,)"
 license="MIT License"
 [[mods]]
 modId="hardermonsterboats"
 version="${file.jarVersion}"
 displayName="Harder Monster Boats"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/harder-monster-boats"
-updateJSONURL="https://github.com/mactso/HarderMonsterBoats/raw/main/update.json"
 logoFile="Logo.png"
 authors="MacTso, Lupicus"
 description='hardermonsterboats.'
 [[dependencies.hardermonsterboats]]
     modId="forge"
     mandatory=true
-    versionRange="[39,)"
+    versionRange="[34,)"
     ordering="NONE"
     side="SERVER"
 
 [[dependencies.hardermonsterboats]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18,1.19)"
+    versionRange="[1.16.3,1.17.0)"
     ordering="NONE"
     side="SERVER"
-
-

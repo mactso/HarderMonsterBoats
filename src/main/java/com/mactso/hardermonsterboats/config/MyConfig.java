@@ -11,10 +11,10 @@ import com.mactso.hardermonsterboats.Main;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
-import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
+import net.minecraftforge.fml.config.ModConfig.ModConfigEvent;
+
 
 @Mod.EventBusSubscriber(modid = Main.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MyConfig {
@@ -101,7 +101,6 @@ public class MyConfig {
 		
 		
 		public Common(ForgeConfigSpec.Builder builder) {
-			String baseTrans = Main.MODID + ".config.";
 
 			willMonsterMountBoat = builder
 					.comment("Checked Mods Name List")
