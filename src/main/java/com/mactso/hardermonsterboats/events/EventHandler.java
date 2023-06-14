@@ -1,13 +1,9 @@
 package com.mactso.hardermonsterboats.events;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.mactso.hardermonsterboats.Main;
 import com.mactso.hardermonsterboats.config.MyConfig;
 
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Monster;
@@ -21,9 +17,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
 @Mod.EventBusSubscriber(bus = Bus.FORGE, modid = Main.MODID)
 public class EventHandler {
-	private static final Logger LOGGER = LogManager.getLogger();
 
-    @SubscribeEvent
+	@SubscribeEvent
     public static void onTarget(LivingDamageEvent event)
     {
     	
@@ -51,7 +46,7 @@ public class EventHandler {
 				String meRN = EntityType.getKey(me.getType()).toString();
 
 				if (!MyConfig.isWillMonsterNotHitBoat(meRN)) {
-					boat.hurt(DamageSource.GENERIC, 6.0f);
+					boat.hurt(me.damageSources().generic(), 6.0f);
 				}
 
 				if (MyConfig.isWillMonsterMountBoat(meRN)) {
