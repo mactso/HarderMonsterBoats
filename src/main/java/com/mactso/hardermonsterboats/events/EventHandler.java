@@ -1,63 +1,49 @@
 package com.mactso.hardermonsterboats.events;
 
-import com.mactso.hardermonsterboats.Main;
-import com.mactso.hardermonsterboats.config.MyConfig;
+import com.mactso.hardermonsterboats.config.MyConfigs;
 
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.vehicle.Boat;
-import net.minecraftforge.event.entity.EntityMountEvent;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+//import net.minecraftforge.event.entity.EntityMountEvent;
+//import net.minecraftforge.event.entity.living.LivingDamageEvent;
 
-@Mod.EventBusSubscriber(bus = Bus.FORGE, modid = Main.MODID)
 public class EventHandler {
 
-	@SubscribeEvent
-    public static void onTarget(LivingDamageEvent event)
-    {
-    	
-        LivingEntity e = event.getEntity();
-        if (!(e instanceof ServerPlayer)) {
-            if (e.getVehicle() instanceof Boat) {
-				String meRN = EntityType.getKey(e.getType()).toString();
-    			if (!MyConfig.isWillMonsterNotLeaveBoat(meRN)) {
-    	        	e.stopRiding();
-    			}
+	public static void onEntityActuallyHurt(LivingEntity e) {
 
-            }
-        }
-        
-    }
-    
-    
-	
-	@SubscribeEvent(priority = EventPriority.LOW)
-	public void onMountEvent(EntityMountEvent event) {
+		if ((e instanceof ServerPlayer))
+			return;
 
-		if (event.getEntityBeingMounted() instanceof Boat boat) {
-			if (event.getEntity() instanceof Monster me) {
+		if (!(e.getVehicle() instanceof Boat))
+			return;
 
-				String meRN = EntityType.getKey(me.getType()).toString();
-
-				if (!MyConfig.isWillMonsterNotHitBoat(meRN)) {
-					boat.hurt(me.damageSources().generic(), 6.0f);
-				}
-
-				if (MyConfig.isWillMonsterMountBoat(meRN)) {
-					return;
-				} else {
-					if (event.isCancelable()) {
-						event.setCanceled(true);
-						return;
-					}
-				}
-			}
+		String meRN = EntityType.getKey(e.getType()).toString();
+		if (!MyConfigs.isWillMonsterNotLeaveBoat(meRN)) {
+			e.stopRiding();
 		}
+
 	}
+
+	public static boolean canEntityMountBoat(Entity boat, Entity e) {
+
+	
+		if (!(e instanceof Monster me))
+			return true;
+
+		String meRN = EntityType.getKey(me.getType()).toString();
+
+		if (!MyConfigs.isWillMonsterNotHitBoat(meRN)) {
+			boat.hurt(me.damageSources().generic(), 6.0f);
+		}
+
+		if (MyConfigs.isWillMonsterMountBoat(meRN)) {
+			return true;
+		}
+		return false;
+	}
+
 }

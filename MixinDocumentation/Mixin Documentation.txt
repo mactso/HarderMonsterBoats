@@ -1,0 +1,131 @@
+[22:28:20] [Datafixer Bootstrap/INFO] (Minecraft) 226 Datafixer optimizations took 401 milliseconds
+[22:28:20] [main/ERROR] (FabricLoader/Mixin) Mixin apply for mod 
+
+hardermonsterboats failed hardermonsterboats.mixins.json:EntityMixin from mod hardermonsterboats -> net.minecraft.world.entity.Entity: org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException Invalid descriptor on hardermonsterboats.mixins.json:EntityMixin from mod hardermonsterboats->@Inject::isBoatMountable(Lnet/minecraft/world/entity/Entity;ZLorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V! Expected (Lnet/minecraft/world/entity/Entity;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V but found (Lnet/minecraft/world/entity/Entity;ZLorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V [INJECT_APPLY Applicator Phase -> hardermonsterboats.mixins.json:EntityMixin from mod hardermonsterboats -> Apply Injections ->  -> Inject -> hardermonsterboats.mixins.json:EntityMixin from mod hardermonsterboats->@Inject::isBoatMountable(Lnet/minecraft/world/entity/Entity;ZLorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V]
+org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException: 
+
+Invalid descriptor on hardermonsterboats.mixins.json:EntityMixin from mod 
+  hardermonsterboats->@Inject::isBoatMountable(Lnet/minecraft/world/entity/Entity;Z
+	Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V! 
+  Expected 
+   (Lnet/minecraft/world/entity/Entity;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V 
+  but found 
+   (Lnet/minecraft/world/entity/Entity;ZLorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V 
+   [INJECT_APPLY Applicator Phase -> hardermonsterboats.mixins.json:EntityMixin from mod hardermonsterboats -> Apply Injections ->  -> 
+     Inject -> hardermonsterboats.mixins.json:EntityMixin from mod hardermonsterboats
+      ->@Inject::isBoatMountable(Lnet/minecraft/world/entity/Entity;ZLorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;)V]
+	at org.spongepowered.asm.mixin.injection.callback.CallbackInjector.inject(CallbackInjector.java:560) ~[sponge-mixin-0.15.4+mixin.0.8.7.jar:0.15.4+mixin.0.8.7]
+	at org.spongepowered.asm.mixin.injection.callback.CallbackInjector.inject(CallbackInjector.java:490) ~[sponge-mixin-0.15.4+mixin.0.8.7.jar:0.15.4+mixin.0.8.7]
+	at org.spongepowered.asm.mixin.injection.code.Injector.inject(Injector.java:284) ~[sponge-mixin-0.15.4+mixin.0.8.7.jar:0.15.4+mixin.0.8.7]
+	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.inject(InjectionInfo.java:508) ~[sponge-mixin-0.15.4+mixin.0.8.7.jar:0.15.4+mixin.0.8.7]
+	at org.spongepowered.asm.mixin.transformer.MixinTargetContext.applyInjections(MixinTargetContext.java:1483) ~[sponge-mixin-0.15.4+mixin.0.8.7.jar:0.15.4+mixin.0.8.7]
+
+
+describe the java mixin descriptors
+
+
+ChatGPT said:
+In Java (and especially in Minecraft modding using Mixin via Fabric or Sponge), mixin descriptors are strings used to uniquely identify methods and fields, including their names and types, for the purpose of modifying them at runtime.
+
+🧩 What Is a Mixin Descriptor?
+A mixin descriptor is a string representation of a method or field's type signature. It’s how Mixin identifies what you want to modify in bytecode.
+
+📌 Method Descriptor Format:
+plaintext
+Copy
+Edit
+(methodName)(argumentTypes)returnType
+Examples:
+myMethod()V → myMethod takes no arguments and returns void
+
+myMethod(I)V → myMethod takes an int and returns void
+
+myMethod(Ljava/lang/String;I)Z → takes a String and int, returns boolean
+
+👉 All types are represented in JVM descriptor format.
+
+🧾 Descriptor Type Codes:
+
+Java Type	Descriptor
+int	I
+boolean	Z
+char	C
+byte	B
+short	S
+long	J
+float	F
+double	D
+void	V
+Object (e.g., String)	Lfully/qualified/ClassName;
+Arrays	[Type
+📌 Field Descriptors
+For fields, it's just the type:
+
+I for int
+
+Ljava/lang/String; for String
+
+[I for int[]
+
+🧪 Example Mixin Usage
+java
+Copy
+Edit
+@Mixin(TargetClass.class)
+public class MyMixin {
+
+    @Inject(method = "myMethod(Ljava/lang/String;I)V", at = @At("HEAD"))
+    private void onMyMethod(String s, int i, CallbackInfo ci) {
+        // your code here
+    }
+}
+
+
+
+✅ Need help writing a descriptor for a specific method? Just tell me the method signature in Java, and I’ll give you the descriptor.
+
+✅ Need help writing a descriptor for a specific method? Just tell me the method signature in Java, and I’ll give you the descriptor.
+
+
+
+"Entity Class 
+isBoatMountable (Entity e , Boolean b) method"
+
+
+
+You said:
+Entity Class 
+isBoatMountable (Entity e , Boolean b) method
+
+
+
+ChatGPT said:
+Thanks! To describe the method isBoatMountable(Entity e, Boolean b) in Java mixin descriptor format, we need to:
+
+🎯 Step 1: Determine the full descriptor
+Assuming:
+
+Entity is net.minecraft.entity.Entity
+
+Boolean is java.lang.Boolean
+
+The method returns boolean
+
+✅ Method Signature:
+java
+Copy
+Edit
+boolean isBoatMountable(Entity e, Boolean b)
+🧩 Mixin Descriptor:
+bash
+Copy
+Edit
+isBoatMountable(Lnet/minecraft/entity/Entity;Ljava/lang/Boolean;)Z
+📘 Breakdown:
+Lnet/minecraft/entity/Entity; → fully-qualified class for Entity
+
+Ljava/lang/Boolean; → boxed Boolean object
+
+Z → return type boolean
+
+If you need the descriptor for a different package or a method injection setup, just let me know!

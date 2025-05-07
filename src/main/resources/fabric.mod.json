@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "hardermonsterboats",
+  "version": "${version}",
+
+  "name": "Harder Monster Boats",
+  "description": "Control What Mobs will get in (or break) Boats",
+  "authors": [
+    "Mactso, Lupicus"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/harder-monster-boats"
+  },
+
+  "license": "MIT License",
+  "icon": "logo.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.mactso.hardermonsterboats.Main"
+    ]
+  },
+  "mixins": [
+    "hardermonsterboats.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.15.7",
+    "fabric": "*",
+    "minecraft": "1.21.1",
+    "java": ">=21"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
