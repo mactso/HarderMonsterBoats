@@ -9,25 +9,29 @@ import org.apache.logging.log4j.Logger;
 
 import com.mactso.hardermonsterboats.Main;
 
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.EventBusSubscriber.Bus;
+import net.neoforged.fml.event.config.ModConfigEvent;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec.ConfigValue;
 
-@Mod.EventBusSubscriber(modid = Main.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = Main.MODID, bus = Bus.MOD)
 public class MyConfig {
 
+	
+	@SuppressWarnings("unused")
+	private static final Logger LOGGER = LogManager.getLogger();
+	public static final Common COMMON;
+	public static final ModConfigSpec COMMON_SPEC;
+	
+	
 	static {
 
-		final Pair<Common, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Common::new);
+		final Pair<Common, ModConfigSpec> specPair = new ModConfigSpec.Builder().configure(Common::new);
 		COMMON_SPEC = specPair.getRight();
 		COMMON = specPair.getLeft();
 	}
-
-	private static final Logger LOGGER = LogManager.getLogger();
-	public static final Common COMMON;
-	public static final ForgeConfigSpec COMMON_SPEC;
 
 
 	public static String[] willMonsterMountBoat;
@@ -99,7 +103,8 @@ public class MyConfig {
 
 		
 		
-		public Common(ForgeConfigSpec.Builder builder) {
+		@SuppressWarnings("deprecation")
+		public Common(ModConfigSpec.Builder builder) {
 
 			willMonsterMountBoat = builder
 					.comment("Checked Mods Name List")

@@ -3,23 +3,30 @@ package com.mactso.hardermonsterboats.events;
 import com.mactso.hardermonsterboats.Main;
 import com.mactso.hardermonsterboats.config.MyConfig;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.vehicle.Boat;
-import net.minecraftforge.event.entity.EntityMountEvent;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraft.world.level.Level;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.ICancellableEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.EventBusSubscriber.Bus;
+import net.neoforged.neoforge.client.event.sound.SoundEvent.SoundSourceEvent;
+import net.neoforged.neoforge.event.entity.EntityMountEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
-@Mod.EventBusSubscriber(bus = Bus.FORGE, modid = Main.MODID)
+@EventBusSubscriber(bus = Bus.GAME, modid = Main.MODID)
 public class EventHandler {
 
 	@SubscribeEvent
-    public static void onTarget(LivingDamageEvent event)
+    public static void onTarget(LivingDamageEvent.Pre event)
     {
     	
         LivingEntity e = event.getEntity();
@@ -38,7 +45,7 @@ public class EventHandler {
     
 	
 	@SubscribeEvent(priority = EventPriority.LOW)
-	public void onMountEvent(EntityMountEvent event) {
+	public static void onMountEvent(EntityMountEvent event) {
 
 		if (event.getEntityBeingMounted() instanceof Boat boat) {
 			if (event.getEntity() instanceof Monster me) {
@@ -47,15 +54,18 @@ public class EventHandler {
 
 				if (!MyConfig.isWillMonsterNotHitBoat(meRN)) {
 					boat.hurt(me.damageSources().generic(), 6.0f);
+					Level level = me.level();
+					if (level instanceof ServerLevel slevel) {
+						slevel.playSound(null, me, SoundEvents.TURTLE_EGG_CRACK, SoundSource.HOSTILE, 0.5f, 0.5f);
+					}
+				    
 				}
 
 				if (MyConfig.isWillMonsterMountBoat(meRN)) {
 					return;
 				} else {
-					if (event.isCancelable()) {
-						event.setCanceled(true);
-						return;
-					}
+					event.setCanceled(true);
+					return;
 				}
 			}
 		}
