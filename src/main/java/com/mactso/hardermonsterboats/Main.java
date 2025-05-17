@@ -1,7 +1,6 @@
 package com.mactso.hardermonsterboats;
 
 import com.mactso.hardermonsterboats.config.MyConfig;
-import com.mactso.hardermonsterboats.events.EventHandler;
 import com.mactso.hardermonsterboats.util.Utility;
 
 import net.neoforged.bus.api.IEventBus;
@@ -10,7 +9,6 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.common.NeoForge;
 
 @Mod("hardermonsterboats")
 public class Main {

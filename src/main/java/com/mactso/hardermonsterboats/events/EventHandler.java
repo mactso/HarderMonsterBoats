@@ -5,7 +5,6 @@ import com.mactso.hardermonsterboats.config.MyConfig;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
@@ -14,11 +13,9 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.EventPriority;
-import net.neoforged.bus.api.ICancellableEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.EventBusSubscriber.Bus;
-import net.neoforged.neoforge.client.event.sound.SoundEvent.SoundSourceEvent;
 import net.neoforged.neoforge.event.entity.EntityMountEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
@@ -53,10 +50,13 @@ public class EventHandler {
 				String meRN = EntityType.getKey(me.getType()).toString();
 
 				if (!MyConfig.isWillMonsterNotHitBoat(meRN)) {
-					boat.hurt(me.damageSources().generic(), 6.0f);
+					// boat.hurt(me.damageSources().generic(), 6.0f);
 					Level level = me.level();
 					if (level instanceof ServerLevel slevel) {
+						boat.hurtServer(slevel, me.damageSources().generic(), 6.0f);
 						slevel.playSound(null, me, SoundEvents.TURTLE_EGG_CRACK, SoundSource.HOSTILE, 0.5f, 0.5f);
+					} else {
+						boat.hurtClient(me.damageSources().generic());
 					}
 				    
 				}
