@@ -46,6 +46,7 @@ public class EventHandler {
 				String meRN = EntityType.getKey(me.getType()).toString();
 
 				if (!MyConfig.isWillMonsterNotHitBoat(meRN)) {
+					// boat.hurtServer(event.getLevel(), me.damageSources().generic(), 6.0f);
 					boat.hurt(me.damageSources().generic(), 6.0f);
 				}
 
