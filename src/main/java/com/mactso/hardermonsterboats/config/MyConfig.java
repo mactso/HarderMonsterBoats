@@ -11,7 +11,7 @@ import com.mactso.hardermonsterboats.Main;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 
@@ -69,10 +69,6 @@ public class MyConfig {
 	
 	@SubscribeEvent
 	public static void onModConfigEvent(final ModConfigEvent configEvent) {
-
-		if (configEvent instanceof ModConfigEvent.Unloading) 
-			return;
-		// .Reloading or .Loading
 		if (configEvent.getConfig().getSpec() == MyConfig.COMMON_SPEC) {
 			bakeConfig();
 		}
