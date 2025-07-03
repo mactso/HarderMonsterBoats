@@ -15,11 +15,10 @@ import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.EventBusSubscriber.Bus;
 import net.neoforged.neoforge.event.entity.EntityMountEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
-@EventBusSubscriber(bus = Bus.GAME, modid = Main.MODID)
+@EventBusSubscriber(modid = Main.MODID)
 public class EventHandler {
 
 	@SubscribeEvent

@@ -11,12 +11,11 @@ import com.mactso.hardermonsterboats.Main;
 
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.EventBusSubscriber.Bus;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.common.ModConfigSpec.ConfigValue;
 
-@EventBusSubscriber(modid = Main.MODID, bus = Bus.MOD)
+@EventBusSubscriber(modid = Main.MODID)
 public class MyConfig {
 
 	
