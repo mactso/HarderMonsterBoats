@@ -1,10 +1,10 @@
 modLoader="javafml"
-loaderVersion="[59,)"
+loaderVersion="[61,)"
 license="MIT"
 
 [[mods]]
 modId="hardermonsterboats"
-version="59.7.0"
+version="61.7.0"
 displayName="Harder Monster Boats"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/harder-monster-boats"
 displayTest="IGNORE_SERVER_VERSION"
@@ -15,13 +15,13 @@ description='hardermonsterboats.'
 [[dependencies.hardermonsterboats]]
 modId="forge"
 mandatory=true
-versionRange="[59,)"
+versionRange="[61,)"
 ordering="NONE"
 side="BOTH"
 
 [[dependencies.hardermonsterboats]]
 modId="minecraft"
 mandatory=true
-versionRange="[1.21.9,1.22)"
+versionRange="[1.21.11,1.22)"
 ordering="NONE"
 side="BOTH"

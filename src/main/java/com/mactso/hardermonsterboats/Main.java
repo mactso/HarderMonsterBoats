@@ -1,8 +1,5 @@
 package com.mactso.hardermonsterboats;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.mactso.hardermonsterboats.config.MyConfig;
 import com.mactso.hardermonsterboats.events.EventHandler;
 import com.mactso.hardermonsterboats.util.Utility;
@@ -11,7 +8,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -19,7 +15,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class Main {
 
 	    public static final String MODID = "hardermonsterboats"; 
-		private static final Logger LOGGER = LogManager.getLogger();
+
 		
 	    public Main(FMLJavaModLoadingContext context)
 	    {

@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import com.mactso.hardermonsterboats.Main;
 
@@ -25,7 +23,7 @@ public class MyConfig {
 		COMMON = specPair.getLeft();
 	}
 
-	private static final Logger LOGGER = LogManager.getLogger();
+
 	public static final Common COMMON;
 	public static final ForgeConfigSpec COMMON_SPEC;
 
