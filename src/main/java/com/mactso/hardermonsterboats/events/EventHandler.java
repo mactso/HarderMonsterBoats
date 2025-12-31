@@ -3,6 +3,7 @@ package com.mactso.hardermonsterboats.events;
 import com.mactso.hardermonsterboats.Main;
 import com.mactso.hardermonsterboats.config.MyConfig;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,7 +25,11 @@ public class EventHandler {
 	@SubscribeEvent
 	public static boolean onTarget(LivingDamageEvent event) {
 
-		LivingEntity e = event.getEntity();
+        LivingEntity e = event.getEntity();
+
+        // Skip client-side processing
+        if (e.level().isClientSide()) return CONTINUE_EVENT;
+
 		if (e instanceof ServerPlayer)
 			return CONTINUE_EVENT;
 
@@ -42,13 +47,17 @@ public class EventHandler {
 	@SubscribeEvent(priority = Priority.LOW)
 	public static boolean onMountEvent(EntityMountEvent event) {
 
+        // Skip client-side processing
+        if (event.getEntity().level().isClientSide()) return CONTINUE_EVENT;
+		
 		if (event.getEntityBeingMounted() instanceof Boat boat) {
 			if (event.getEntity() instanceof Monster me) {
 
 				String meRN = EntityType.getKey(me.getType()).toString();
 
 				if (!MyConfig.isWillMonsterNotHitBoat(meRN)) {
-					boat.hurt(me.damageSources().generic(), 6.0f);
+	                // Apply server-side damage to the boat
+	                boat.hurtServer((ServerLevel) me.level(), me.damageSources().generic(), 6.0f);
 				}
 
 				if (!MyConfig.isWillMonsterMountBoat(meRN)) {
