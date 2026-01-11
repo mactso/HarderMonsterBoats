@@ -1,4 +1,4 @@
-package com.mactso.hardermonsterboats.config;
+package com.mactso.hardermonsterboats.modloader.config;
 
 import java.util.Arrays;
 import java.util.List;
@@ -7,7 +7,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.mactso.hardermonsterboats.Main;
+import com.mactso.hardermonsterboats.modloader.main.Main;
 
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
