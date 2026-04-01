@@ -1,4 +1,4 @@
-package com.mactso.hardermonsterboats.util;
+package com.mactso.hardermonsterboats.common.util;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

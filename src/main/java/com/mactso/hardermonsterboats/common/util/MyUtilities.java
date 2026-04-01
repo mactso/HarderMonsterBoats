@@ -1,4 +1,4 @@
-package com.mactso.hardermonsterboats.util;
+package com.mactso.hardermonsterboats.common.util;
 
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
 import net.minecraft.world.phys.Vec3;
 
-public class Utility {
+public class MyUtilities {
 	public final static int FOUR_SECONDS = 80;
 	public final static int TWO_SECONDS = 40;
 	public final static float Pct00 = 0.00f;

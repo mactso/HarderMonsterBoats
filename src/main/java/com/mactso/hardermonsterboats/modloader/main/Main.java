@@ -1,7 +1,7 @@
-package com.mactso.hardermonsterboats;
+package com.mactso.hardermonsterboats.modloader.main;
 
-import com.mactso.hardermonsterboats.config.MyConfig;
-import com.mactso.hardermonsterboats.util.Utility;
+import com.mactso.hardermonsterboats.common.util.MyUtilities;
+import com.mactso.hardermonsterboats.modloader.config.MyConfig;
 
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -19,7 +19,7 @@ public class Main {
 	    {
 	        modEventBus.register(this);
 			modContainer.registerConfig(ModConfig.Type.COMMON, MyConfig.COMMON_SPEC);
-			Utility.debugMsg (0, MODID + ": Registering Mod");
+			MyUtilities.debugMsg (0, MODID + ": Registering Mod");
 	    }
 	    
 		@SubscribeEvent 

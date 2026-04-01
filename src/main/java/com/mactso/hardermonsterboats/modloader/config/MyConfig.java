@@ -1,4 +1,4 @@
-package com.mactso.hardermonsterboats.config;
+package com.mactso.hardermonsterboats.modloader.config;
 
 import java.util.Arrays;
 import java.util.List;
@@ -7,13 +7,23 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.mactso.hardermonsterboats.Main;
+import com.mactso.hardermonsterboats.modloader.main.Main;
 
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.common.ModConfigSpec.ConfigValue;
+
+/**
+ * Handles the configuration for HarderMonsterBoats mod.
+ *
+ * <p>This class provides static access to configuration values, which control
+ * monster behavior around boats. All lookups return <b>Java primitives or Strings</b>
+ * (including arrays of Strings). This is an explicit contract: no Minecraft objects
+ * (like EntityType or ResourceLocation) are returned directly from the config.
+ *
+ **/
 
 @EventBusSubscriber(modid = Main.MODID)
 public class MyConfig {
